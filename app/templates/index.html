@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application de Gestion de Budget</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  
+    <header>
+        <h1>Gestion de Budget</h1>
+    </header>
+
+    <main>
+        <!-- Section Résumé -->
+        <section id="summary">
+            <h2>Résumé</h2>
+            <p>Solde actuel: <span id="current-balance">0 €</span></p>
+            <p>Total des revenus: <span id="total-income">0 €</span></p>
+            <p>Total des dépenses: <span id="total-expense">0 €</span></p>
+        </section>
+
+        <h2>Graphiques</h2>
+        <section id="charts">
+            
+            <div class="chart-container">
+                <canvas id="budgetChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+        </section>
+
+ 
+        
+        <!-- Section Ajout Transaction -->
+        <section id="ajout-transaction">
+            <h2>Ajouter une transaction</h2>
+            <form id="transaction-form">
+                <label for="amount">Montant :</label>
+                <input type="number" id="amount" name="amount" step="0.01" required placeholder="Veuillez saisir un montant">
+
+                <label for="type">Type :</label>
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Veuillez choisir le type du montant</option>
+                    <option value="income">Revenu</option>
+                    <option value="expense">Dépense</option>
+                </select>
+
+                <label for="category">Catégorie :</label>
+                <input type="text" id="category" name="category" required placeholder="Veuillez saisir la catégorie du montant">
+
+                <label for="date">Date :</label>
+
+                <input type="date" id="date" name="date" required>
+
+                <button type="submit">
+                    <i class="fa fa-plus"></i> Ajouter
+                </button>
+            </form>
+        </section>
+
+        <!-- Section d'ajout de filtre transaction, categorie et type -->
+        <section id="filters">
+            <h2>Filtrer les Transactions</h2>
+            <label for="filter-date">Date :</label>
+            <input type="date" id="filter-date">
+        
+            <label for="filter-category">Catégorie :</label>
+            <input type="text" id="filter-category">
+
+            <label for="filter-type">Type :</label>
+            <select id="filter-type">
+                <option value="">Tous</option>
+                <option value="income">Revenu</option>
+                <option value="expense">Dépense</option>
+            </select>
+        
+            <button id="apply-filters">
+                <i class="fa fa-filter"></i> Appliquer les Filtres
+            </button>
+        </section>
+
+        <!-- Section pour Définir le Budget -->
+    <section id="define-budget">
+        <h2>Définir le Budget Mensuel</h2>
+        <form id="budget-form">
+            <label for="monthly-budget">Budget Mensuel (€) :</label>
+            <input type="number" id="monthly-budget" name="monthly-budget" step="0.01" required placeholder="Entrer le budget mensuel">
+            <button type="submit">Définir le Budget</button>
+        </form>
+        <p>Budget Actuel: <span id="current-budget">1100 €</span></p>
+    </section>
+
+        
+        <!-- Section Liste pour les Transactions -->
+        <section id="transaction-list">
+            <h2>Liste des transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Catégorie</th>
+                        <th>Type</th>
+                        <th>Montant</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions">
+                    
+
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
