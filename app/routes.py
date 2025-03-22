@@ -4,9 +4,14 @@ import sqlite3
 app = Flask(__name__)
 
 def init_app(app):
-    # Route d'accueil
+    # Route pour la page d'accueil
     @app.route('/')
     def home():
+        return render_template('accueil.html')
+
+    # Route pour afficher le tableau de bord
+    @app.route('/dashboard')
+    def dashboard():
         return render_template('index.html')
 
     # Route pour récupérer le résumé
@@ -121,13 +126,13 @@ def init_app(app):
             for row in transactions
         ]
         return jsonify(transactions_list)
-# Route pour définir le budget mensuel
+
+    # Route pour définir le budget mensuel
     @app.route('/set_budget', methods=['POST'])
     def set_budget():
         data = request.get_json()
         monthly_budget = data.get('monthly_budget')
 
-        # Vérifier que le budget mensuel est fourni
         if monthly_budget is None:
             return jsonify({'message': 'Le budget mensuel est requis'}), 400
 
@@ -144,43 +149,14 @@ def init_app(app):
 
         return jsonify({'message': 'Budget mensuel défini avec succès!'})
 
-
-   # Route pour récupérer le budget mensuel
+    # Route pour récupérer le budget mensuel
     @app.route('/get_budget', methods=['GET'])
     def get_budget():
         with sqlite3.connect('budget.db') as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT amount FROM budgets WHERE id = 1')
             budget = cursor.fetchone()
-            if budget:
-                return jsonify({'monthly_budget': budget[0]})
-            else:
-                return jsonify({'monthly_budget': 0})
+            return jsonify({'monthly_budget': budget[0] if budget else 0})
 
 
 
-
-# Route pour la page d'accueil
-@app.route('/')
-def home():
-    return render_template('base.html')
-
-# Route pour ajouter une transaction
-@app.route('/add-transaction')
-def add_transaction():
-    return "Page Ajouter Transaction"
-
-# Route pour afficher les transactions
-@app.route('/transactions')
-def transactions():
-    return "Page Liste des Transactions"
-
-# Route pour afficher le résumé
-@app.route('/summary')
-def summary():
-    return "Page Résumé"
-
-# Route pour afficher les catégories
-@app.route('/categories')
-def categories():
-    return "Page Catégories"

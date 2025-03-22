@@ -133,16 +133,38 @@ table th {
     background-color: #4F8EF7;
 }
 
-/* Contenu principal 
-.content {
+/* Page d'accueil */
+.container {
+    text-align: center;
+    max-width: 600px;
+    margin: 100px auto;
     padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-section {
-    display: none; /* Par défaut, toutes les sections sont masquées */
-/*}
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
 
-section.active {
-    display: block; /* La section active est affichée */
-/*}
-/*
+p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
