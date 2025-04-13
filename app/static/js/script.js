@@ -23,6 +23,8 @@ document.getElementById('transaction-form').addEventListener('submit', function(
     });
 });
 
+
+
 // Mise à jour du résumé des montants 
 function updateSummary() {
     fetch('/get_summary')
@@ -36,7 +38,7 @@ function updateSummary() {
             updateCharts(summary);
 
             // Vérification du budget après mise à jour du résumé
-            checkBudget(summary);
+           // checkBudget(summary);
         })
         .catch(error => {
             console.error('Erreur lors de la mise à jour du résumé:', error);
@@ -64,6 +66,8 @@ function checkBudget(summary) {
 }
 
 
+
+
 // Fonction pour ajouter ou modifier le budget mensuel 
 document.getElementById('budget-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -87,8 +91,7 @@ document.getElementById('budget-form').addEventListener('submit', function(event
         fetch('/get_budget')
             .then(response => response.json())
             .then(data => {
-                console.log('Budget récupéré :', data.monthly_budget);  // Vérifier la valeur récupérée dans la console 
-
+                console.log('Budget récupéré :', data.monthly_budget);  // verifier le budjet dans la console 
                 // Mise à jour du budget dans le DOM
                 document.getElementById('current-budget').textContent = `${data.monthly_budget.toFixed(2)} $`;
             });
@@ -98,6 +101,7 @@ document.getElementById('budget-form').addEventListener('submit', function(event
         alert('Une erreur est survenue lors de la mise à jour du budget.');
     });
 });
+
 
 
 
@@ -117,10 +121,12 @@ function updateTransactions() {
                     <td>${transaction.type}</td>
                     <td>${transaction.amount.toFixed(2)} $</td>
                     <td>
+                    
                         <button class="edit-btn">Modifier</button>
                         <button class="delete-btn">Supprimer</button>
                     </td>
                 `;
+                
                 transactionTable.appendChild(row);
 
                 // Ajouter des écouteurs d'événements pour les boutons
@@ -130,10 +136,13 @@ function updateTransactions() {
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des transactions:', error);
+            
             console.log(typeof transaction.amount, transaction.amount);
             alert('Une erreur est survenue. Veuillez réessayer plus tard.');
         });
 }
+
+
 
 // Supprimer une transaction
 function deleteTransaction(transactionId) {
@@ -151,10 +160,14 @@ function deleteTransaction(transactionId) {
         })
         .catch(error => {
             console.error('Erreur lors de la suppression de la transaction:', error);
+            
             alert('Une erreur est survenue lors de la suppression de la transaction.');
         });
     }
 }
+
+
+
 
 // Modifier une transaction
 function editTransaction(transaction) {
@@ -188,6 +201,9 @@ function editTransaction(transaction) {
     }
 }
 
+
+
+
 // Mise à jour des graphiques
 let budgetChartInstance;
 let barChartInstance;
@@ -204,7 +220,7 @@ function updateCharts(summary) {
         barChartInstance.destroy();
     }
 
-    // Créer le graphique en donut
+    // graphique en donut
     budgetChartInstance = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -239,6 +255,8 @@ function updateCharts(summary) {
     });
 }
 
+
+
 // Application des filtres
 function applyFilters() {
     const dateFilter = document.getElementById('filter-date').value;
@@ -258,6 +276,7 @@ function applyFilters() {
 
             transactions.forEach(transaction => {
                 const row = document.createElement('tr');
+                
                 row.innerHTML = `
                     <td>${transaction.date}</td>
                     <td>${transaction.category}</td>
@@ -271,6 +290,7 @@ function applyFilters() {
                 transactionTable.appendChild(row);
 
                 row.querySelector('.edit-btn').addEventListener('click', () => editTransaction(transaction));
+                
                 row.querySelector('.delete-btn').addEventListener('click', () => deleteTransaction(transaction.id));
             });
         })
