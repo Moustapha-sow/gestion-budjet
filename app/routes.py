@@ -63,6 +63,8 @@ def init_app(app):
 
         return jsonify({'message': 'Transaction ajoutée avec succès!'})
 
+
+    
     # Route pour supprimer une transaction
     @app.route('/delete_transaction', methods=['DELETE'])
     def delete_transaction():
@@ -79,6 +81,8 @@ def init_app(app):
 
         return jsonify({"message": "Transaction supprimée avec succès"}), 200
 
+
+    
     # Route pour modifier une transaction
     @app.route('/edit_transaction', methods=['POST'])
     def edit_transaction():
@@ -97,6 +101,7 @@ def init_app(app):
 
         return jsonify({'message': 'Transaction modifiée avec succès!'})
 
+    
     # Route pour récupérer les transactions filtrées
     @app.route('/get_filtered_transactions', methods=['GET'])
     def get_filtered_transactions():
@@ -127,6 +132,7 @@ def init_app(app):
         ]
         return jsonify(transactions_list)
 
+    
     # Route pour définir le budget mensuel
     @app.route('/set_budget', methods=['POST'])
     def set_budget():
@@ -149,6 +155,7 @@ def init_app(app):
 
         return jsonify({'message': 'Budget mensuel défini avec succès!'})
 
+    
     # Route pour récupérer le budget mensuel
     @app.route('/get_budget', methods=['GET'])
     def get_budget():
