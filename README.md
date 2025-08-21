@@ -9,7 +9,7 @@
 -  Ajout, modification et suppression de transactions
 -  Filtrage des transactions par type (revenu/dépense), date, et catégorie
 -  Résumé mensuel du budget
-- ☁ Hébergement sur Render
+-  Hébergement sur Render
 
 ##  Technologies utilisées
 
